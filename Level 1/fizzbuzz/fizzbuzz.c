@@ -6,12 +6,13 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 12:04:36 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/23 21:12:55 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/04/24 08:54:03 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
+
 void ft_putnbr(unsigned int nb)
 {
     if (nb > 9)
