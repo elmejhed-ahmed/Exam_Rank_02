@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 17:53:51 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/05/28 18:04:03 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/05/28 18:05:08 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,4 @@ char	*ft_strpbrk(const char *s1, const char *s2)
         s1++;
     }
     return NULL;
-}
-
 }
