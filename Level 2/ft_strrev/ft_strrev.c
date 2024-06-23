@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hidenp.c                                           :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 19:06:30 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/06/21 19:11:51 by ael-mejh         ###   ########.fr       */
+/*   Created: 2024/05/28 18:11:45 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/05/28 19:30:47 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-int main(int ac, char **av)
+#include <stdio.h>
+#include <string.h>
+char    *ft_strrev(char *str)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	j = 0;
-	if (ac > 1)
-	{
-		while (av[1][i] && av[2][j])
-		{
-			if (av[1][i] == av[2][j])
-				i++;
-			j++;
-		}
-		if (av[1][i] == '\0')
-			write(1, "1", 1);
-		else
-			write(1, "0", 1);
-	}
-	write(1, "\n", 1);
+    int len = 0;
+    char tmp;
+    while(str[len])
+        len++;
+    int j = 0;
+    while (j < (len / 2))
+    {
+        tmp = str[j];
+        str[j] = str[len - 1 - j];
+        str[len - 1 - j] = tmp;
+        j++;
+    }
+    return str;
+}
+
+int main ()
+{
+	char tr[] = "koamrk";
+    printf("%s", ft_strrev(tr));
 }

@@ -1,53 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_prime_sum.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/29 11:31:37 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/06/20 14:07:17 by ael-mejh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
+#include <stdio.h>
 
-int	ft_atoi(char *s)
+int ft_atoi(char *str)
 {
-	int	res = 0;
+    int i;
+    int sin;
+    int sum;
 
-	while (*s)
-		res = res * 10 + *s++ - 48;
-	return (res);
+    sin = 1;
+    sum = 0;
+    i = 0;
+    while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+        i++;
+    if (str[i] == '-' || str[i] == '+')
+    {
+        if (str[i] == '-')
+            sin *= -1;
+        i++;
+    }
+    while(str[i] >= '0' && str[i] <= '9')
+    {
+        sum = sum * 10 + str[i] - 48;
+        i++;
+    }
+    return (sum * sin);
 }
 
-int	is_prime(int num)
+int prime(int nb)
 {
-	int	i = 2;
+    int n;
 
-	if (num <= 1)
-		return (0);
-	while (i * i <= num)
-	{
-		if (num % i == 0)
-			return (0);
-		i++;
-	}
-	return (1);
+    n = 2;
+    while (n <= nb / 2)
+    {
+        if (nb % n == 0)
+            return 0;
+        n++;
+    }
+    return 1;
 }
-
-void	put_nbr(int n)
+void printnbr(int nb)
 {
-	if (n >= 10)
-		put_nbr(n / 10);
-	char digit = n % 10 + '0';
-	write(1, &digit, 1);
-}
+    unsigned int n;
 
+    n = nb;
+    if (n > 9)
+    {
+        printnbr(n / 10);
+        printnbr(n % 10);
+    }
+    while (n >= 0 && n <= 9)
+    {
+        n += 48;
+        write(1, &n, 1);
+    }
+}
 int main(int ac, char **av)
 {
-
-	if (ac == 2)
-	{
-		int	nbr = ft_atoi(av[1]);
-		int	sum = 0;
-
-		while (nbr > 0)
-		{
-			if (is_prime(nbr))
-				sum += nbr;
-			nbr--;
-		}
-		put_nbr(sum);
-	}
-	write(1, "\n", 1);
-	return (0);
+    int num;
+    int sum;
+    
+    if (ac != 2)
+        return (write(1, "0\n", 2), 0);
+    num = ft_atoi(av[1]);
+    if (num <= 0)
+        return (write(1, "0\n", 2), 0);
+    sum = 0;
+    while (num > 1)
+    {
+        if (prime(num))
+            sum += num;
+        num--;
+    }
+    printnbr(sum);
+    write(1, "\n", 1);
 }

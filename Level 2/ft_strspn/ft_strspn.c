@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hidenp.c                                           :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/21 19:06:30 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/06/21 19:11:51 by ael-mejh         ###   ########.fr       */
+/*   Created: 2024/05/28 19:33:21 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/05/28 20:00:12 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 
-int main(int ac, char **av)
+char *check(const char *ac, int c)
 {
-	int i;
-	int j;
-	
-	i = 0;
-	j = 0;
-	if (ac > 1)
-	{
-		while (av[1][i] && av[2][j])
-		{
-			if (av[1][i] == av[2][j])
-				i++;
-			j++;
-		}
-		if (av[1][i] == '\0')
-			write(1, "1", 1);
-		else
-			write(1, "0", 1);
-	}
-	write(1, "\n", 1);
+    while(*ac)
+    {
+        if(*ac == c)
+            return (char *)ac;
+        ac++;   
+    }
+    return 0;
+}
+size_t	ft_strspn(const char *s, const char *accept)
+{
+    size_t i = 0;
+    while(s[i])
+    {
+        if (check(accept, s[i]) == 0)
+            break;
+        i++;
+    }
+    return i;
 }

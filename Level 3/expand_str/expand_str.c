@@ -1,29 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_str.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/20 16:57:46 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/06/20 17:06:06 by ael-mejh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-int main(int argc, char const *argv[])
+int len(char *str)
 {
     int i;
-    int flag;
+    
+    i = 0;
+    while (str[i])
+        i++;
+    return i;
+}
+int main(int ac, char **av)
+{
+    int i;
+    int j;
 
-    if (argc == 2)
+    i = 0;
+    if (ac == 2)
     {
-        i = 0;
-        while (argv[1][i] == ' ' || argv[1][i] == '\t')
+        while (av[1][i] == ' ' || (av[1][i] >= 9 && av[1][i] <= 13))
             i++;
-        while (argv[1][i])
+        j = len(av[1]) - 1;
+        while (av[1][j] == ' ' || (av[1][j] >= 9 && av[1][j] <= 13))
+            j--;
+        while (i <= j)
         {
-            if (argv[1][i] == ' ' || argv[1][i] == '\t')
-                flag = 1;
-            if (!(argv[1][i] == ' ' || argv[1][i] == '\t'))
+            if (av[1][i] == ' ' || (av[1][i] >= 9 && av[1][i] <= 13))
             {
-                if (flag)
-                    write(1, "   ", 3);
-                flag = 0;
-                write(1, &argv[1][i], 1);
+                write(1, "   ", 3);
+                while (av[1][i] == ' ' || (av[1][i] >= 9 && av[1][i] <= 13))
+                    i++;
             }
+            write(1, &av[1][i], 1);
             i++;
         }
     }
     write(1, "\n", 1);
-    return (0);
 }
