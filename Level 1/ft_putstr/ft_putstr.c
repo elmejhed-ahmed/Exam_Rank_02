@@ -6,18 +6,9 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 13:18:10 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/04/23 13:20:15 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:06:48 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putstr(char *str)
-{
-    int i = 0;
-    while(str[i])
-    {
-        write(1, &str[i], 1);
-        i++;
-    }
-}

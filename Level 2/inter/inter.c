@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 19:59:57 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/05/28 21:12:30 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/06/24 18:07:33 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int check(char *str, char c)
 }
 int main(int ac, char **av)
 {
-    int i = 0;
-    
+    int i;
+
+    i = 0;
     char str[160];
     if (ac == 3)
     {
