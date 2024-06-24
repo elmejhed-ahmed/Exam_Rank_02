@@ -1,35 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rstr_capitalizer.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 14:50:51 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/06/24 15:24:03 by ael-mejh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
+#include <stdio.h>
 
-void    rstr_capitalizer(char *str)
-{
-    int i = 0;
-
-    while (str[i])
-    {
-        if (str[i] >= 'A' && str[i] <= 'Z')
-            str[i] += 32;
-        if ((str[i] >= 'a' && str[i] <= 'z') && (str[i + 1] == ' ' \
-                    || str[i + 1] == '\t' || str[i + 1] == '\0'))
-            str[i] -= 32;
-        write(1, &str[i++], 1);
-    }
-}
-
-int main(int argc, char **argv)
+int main(int ac, char **av)
 {
     int i;
+    int j;
 
-    if (argc == 1)
-        write(1, "\n", 1);
-    else
+    if (ac > 1)
     {
-        i = 1;
-        while (i < argc)
+        j = 1;
+        while(av[j])
         {
-            rstr_capitalizer(argv[i]);
+            i = 0;
+            while(av[j][i])
+            {
+                if (av[j][i] >= 'A' && av[j][i] <= 'Z')
+                    av[j][i] += 32;
+                if(av[j][i + 1] == '\0' || av[j][i + 1] == ' ' || (av[j][i + 1] >= 9 && av[j][i + 1] <= 13))
+                {
+                    if (av[j][i] >= 'a' && av[j][i] <= 'z')
+                        av[j][i] -= 32;
+                }
+                write(1, &av[j][i], 1);
+                i++;
+            }
             write(1, "\n", 1);
-            i += 1;
+            j++;
         }
     }
-    return (0);
+    if (ac == 1 )
+        write(1, "\n", 1);
 }

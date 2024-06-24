@@ -1,37 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_capitalizer.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 16:01:05 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/06/24 16:31:09 by ael-mejh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void	str_capitalizer(char *str)
-{
-	int i = 0;
-
-	if (str[i] >= 'a' && 'z' >= str[i])
-		str[i] -= 32;
-	write(1, &str[i], 1);
-	while (str[++i])
-	{
-		if (str[i] >= 'A' && 'Z' >= str[i])
-			str[i] += 32;
-		if ((str[i] >= 'a' && 'z' >= str[i]) && (str[i - 1] == ' ' || \
-		str[i - 1] == '\t'))
-			str[i] -= 32;
-		write(1, &str[i], 1);
-	}
-}
-
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
 	int i;
+	int j;
 
-	if (argc < 2)
+	if (ac == 1)
 		write(1, "\n", 1);
-	else
+	if (ac > 1)
 	{
 		i = 1;
-		while (i < argc)
+		while(av[i])
 		{
-			str_capitalizer(argv[i]);
+			j = 0;
+			while (av[i][j])
+			{
+				if(av[i][j] >= 'A' && av[i][j] <= 'Z')
+					av[i][j] += 32;
+				if (av[i][0] >= 'a' && av[i][0] <= 'z')
+					av[i][j] -= 32;
+				if (av[i][j - 1] == ' ' || (av[i][j - 1] >= 9 && av[i][j - 1] <= 13))
+				{
+					if (av[i][j] >= 'a' && av[i][j] <= 'z')
+						av[i][j] -= 32;
+				}
+				write(1, &av[i][j], 1);
+				j++;
+			}
 			write(1, "\n", 1);
-			i += 1;
+			i++;
 		}
 	}
 	return (0);

@@ -1,70 +1,78 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tab_mult.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/24 16:36:44 by ael-mejh          #+#    #+#             */
+/*   Updated: 2024/06/24 17:09:49 by ael-mejh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-int	ft_atoi(char *str)
+int ft_atoi(char *str)
 {
-	int result;
-	int sign;
+	int res;
+	int sin;
+	int i;
 
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	i = 0;
+	res = 0;
+	sin = 1;
+	while (str[i] == ' ' || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-' || str[i] == '+')
 	{
-		result = result * 10 + *str - '0';
-		str++;
+		if (str[i] == '-')
+			sin *= -1;
+		i++;
 	}
-	return (sign * result);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nb)
-{
-	if (nb == -2147483648)
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		ft_putchar('-');
-		ft_putchar('2');
-		nb = (nb % 1000000000 * -1);
+		res = res * 10 + str[i] - 48;
+		i++;
 	}
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = (nb * -1);
-	}
-	if (nb / 10 > 0)
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + '0');
+	return (res * sin);
 }
-
-int	main(int argc, char *argv[])
+void print_nbr(int nbr)
 {
-	int	i;
-	int	nbr;
+	unsigned int nb;
 
-	if (argc != 2)
-		write(1, "\n", 1);
-	else
+	nb = nbr;
+	if (nb > 9)
 	{
-		i = 1;
-		nbr = ft_atoi(argv[1]);
-		while (i <= 9)
+		print_nbr(nb / 10);
+		print_nbr(nb % 10);
+	}
+	while (nb >= 0 && nb <= 9)
+	{
+		nb += 48;
+		write(1, &nb, 1);
+	}
+}
+int main(int ac, char **av)
+{
+	int nb1;
+	int nb2;
+	
+	nb1 = 1;
+	if (ac == 2)
+	{
+		nb2 = ft_atoi(av[1]);
+		while(nb1 < 10)
 		{
-			ft_putnbr(i);
-			write(1, " x ", 3);
-			ft_putnbr(nbr);
-			write(1, " = ", 3);
-			ft_putnbr(i * nbr);
+			print_nbr(nb1);
+			write(1," x ", 3);
+			print_nbr(nb2);
+			write(1," = ", 3);
+			print_nbr(nb1 * nb2);
 			write(1, "\n", 1);
-			i += 1;
+			nb1 ++;
 		}
 	}
-	return (0);
+	if (ac != 2)
+		write(1, "\n", 1);
+	return 0;
 }
