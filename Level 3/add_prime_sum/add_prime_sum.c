@@ -6,7 +6,7 @@
 /*   By: ael-mejh <ael-mejh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 11:31:37 by ael-mejh          #+#    #+#             */
-/*   Updated: 2024/06/20 14:07:17 by ael-mejh         ###   ########.fr       */
+/*   Updated: 2024/06/25 13:24:33 by ael-mejh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,19 @@ int ft_atoi(char *str)
 
 int prime(int nb)
 {
-    int n;
-
-    n = 2;
-    while (n <= nb / 2)
+    if (nb <= 1) 
+        return 0;
+    int i;
+    i = 2;
+    while(i < nb)
     {
-        if (nb % n == 0)
-            return 0;
-        n++;
+      if (nb % i == 0) 
+        return 0;
+      i++;
     }
-    return 1;
+    return 1; 
 }
+
 void printnbr(int nb)
 {
     unsigned int n;
